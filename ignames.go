@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
-	"sync"
 	"time"
 )
 
@@ -49,23 +48,22 @@ func valid(status int) bool {
 	return status == 200
 }
 
-func checkName(name string, waitgroup *sync.WaitGroup) {
-	defer waitgroup.Done()
+func checkName(name string, validNames chan string) {
+
 	fmt.Printf("[*] Trying: %s\n", name)
 
 	resp, err := http.Get(baseURL + name)
 
 	if err != nil {
 		fmt.Println("Response error")
-		return false
+		close(validNames)
 	}
 
 	if !valid(resp.StatusCode) {
-		return true
+		validNames <- name
 	}
 
 	resp.Body.Close()
-	return false
 }
 
 //
@@ -73,31 +71,27 @@ func checkName(name string, waitgroup *sync.WaitGroup) {
 //
 
 // SearchRandomNames searches for random usernames and returns valid ones in a list
-func SearchRandomNames(nameLength int, nameCount int) []string {
-
-	var waitgroup sync.WaitGroup
-	var validNames []string
+func SearchRandomNames(nameLength int, nameCount int, validNames chan string) {
 
 	// 3- and 4-letter names are all taken
 	if nameLength <= 4 {
-		return validNames
+		return
 	}
 
 	for i := 0; i < nameCount; i++ {
 		username := newUserName(randomString, nameLength)
-		waitgroup.Add(1)
-		go checkName(username, &waitgroup)
+		go checkName(username, validNames)
 	}
-
-	waitgroup.Wait()
-	return validNames
 }
 
 func main() {
-
 	fmt.Println("ignames v 0.0.1")
 	rand.Seed(time.Now().UnixNano())
 
-	validNames := SearchRandomNames(5, 10)
-	fmt.Println(validNames)
+	validNames := make(chan string)
+	SearchRandomNames(5, 10, validNames)
+
+	for name := range validNames {
+		fmt.Println(name)
+	}
 }
