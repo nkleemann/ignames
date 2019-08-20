@@ -11,7 +11,7 @@ func main() {
 	var waitgroup sync.WaitGroup
 	validNames := make(chan string, config.NumberOfNames)
 
-	searchForPatternG([]rune("l4ila"), validNames, &waitgroup)
+	searchForPatternG([]rune("laila"), validNames, &waitgroup)
 
 	for name := range validNames {
 		fmt.Printf("[!] Valid: %s\tURL: %s\n", name, baseURL+name)
