@@ -2,34 +2,45 @@ package main
 
 import "math/rand"
 
-/*
-	Good usernames have specific patterns.
+var alphabet = []rune("abcdefghijklmnopqrstuvwxyz")
+var numbers = []rune("0123456789")
 
-	We offer the following ones:
-		- Pattern A: [firstname]+[numericSequence]  example: luna221
-		- Pattern B: [firstname]+[randomWord]       example: maxtravels, laurastar
-		- Pattern C: [PatternB]+[numericSequence]   example: maxtravels9, laurastar200
-		- Pattern D: [firstname]+[.]+[verb]         example: jens.codes, jessie.travels
-		- Pattern E: n*[randomWord]  				example: mytravelhobby, coolmathgames
-		- Pattern F: [PatternE]+[numericSequence]   example: mytravelhobby4, coolmathgames24
-		- Pattern G: [randomPermutation],           example: aural (laura)
-		- Pattern H: [leetspeak(PatternA-G)]        example: kyli3j33n3rsb1gg3stst4lk3r
+// Generate a username based on a given pattern with options
+func generateUserName(p Pattern, opts PatternOptions) string {
+	name := ""
 
-	Of course there a more patterns, for example when you use underscores. But we will ignore
-	those since they do not produce good usernames.
-*/
+	switch p {
+	// [firstname] + [numericSequence]
+	case A:
+		name = genPatternA(opts.firstName, opts.numSeqLen)
+	// [firstname] + [randomWord]
+	case B:
+	// [PatternB]  + [numericSequence]
+	case C:
+	// [firstname] + [.] + [verb]
+	case D:
+	// n * [randomWord]
+	case E:
+	// [PatternE]  + [numericSequence]
+	case F:
+	// [randomPermutation]
+	case G:
+	// [leetspeak(PatternA-G)]
+	case H:
 
-// TODO need this one?
-func newUserNamePatternA(firstName string, numberSequence string) string {
-	return firstName + numberSequence
+	}
+	return name
 }
+
+/*
+func genPatternA(firstName string, numSeqLen int) string {
+	return firstName + AllCombinations(numbers, numSeqLen)
+}
+*/
 
 //
 //		HELPER
 //
-
-var alphabet = []rune("abcdefghijklmnopqrstuvwxyz")
-var numbers = []rune("0123456789")
 
 // Get all permutations of a string
 func getPerms(str string) []string {

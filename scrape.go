@@ -7,16 +7,16 @@ import (
 	"sync"
 )
 
-// the instagram base URL
+// The instagram base URL
 const baseURL = "https://instagram.com/"
 
-// check if the name is available and if so send it to the channel 'validNames'
+// Check if the name is available and if so send it to the channel 'validNames'
 func checkName(name string, validNames chan string, waitgroup *sync.WaitGroup) {
 
 	resp, err := http.Get(baseURL + name)
 
 	if err != nil {
-		fmt.Printf("[*] Response error on: %s", baseURL+name)
+		fmt.Printf("[*] Response error on: %s\n", baseURL+name)
 		return
 	}
 
@@ -26,7 +26,6 @@ func checkName(name string, validNames chan string, waitgroup *sync.WaitGroup) {
 	fmt.Printf("[*] Trying: %s\t Status: %d\n", name, resp.StatusCode)
 
 	switch resp.StatusCode {
-
 	// Name is available
 	case 404:
 		validNames <- name
@@ -41,6 +40,7 @@ func checkName(name string, validNames chan string, waitgroup *sync.WaitGroup) {
 		fmt.Println("[*] Made too many requests, try again later...")
 		os.Exit(1)
 
+	// Instagram down omg
 	default:
 		fmt.Printf("[*] Unhandled Status: %d for %s", resp.StatusCode, name)
 		return
@@ -61,3 +61,5 @@ func searchForPatternG(seq []rune, validNames chan string, wg *sync.WaitGroup) {
 	wg.Wait()
 	close(validNames)
 }
+
+// func searchForPattern(pattern Pattern)
