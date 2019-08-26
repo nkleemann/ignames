@@ -2,7 +2,6 @@ package main
 
 // AllCombinations returns every combination of length n from a source set.
 // It is a wrapper for the recursive function 'allCombinationsRec'.
-
 // This function is memory-problematic with sets of len > 20 but we'll
 // use it only for numeric sets of len <= 10.
 func AllCombinations(source []rune, n int) []string {

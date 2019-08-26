@@ -3,35 +3,35 @@
 
 	We offer the following ones:
 
-		- firstNameNumSeq:
+		- A: firstNameNumSeq
 				[firstname] + [numericSequence]
 				example: luna221
 
-		- firstNameRandWord
+		- B: firstNameRandWord
 				[firstname] + [randomWord]
 				example: maxtravels, laurastar
 
-		- firstNameRandWordNumSeq
+		- C: firstNameRandWordNumSeq
 				[PatternB]  + [numericSequence]
 				example: maxtravels9, laurastar200
 
-		- firstNameDotVerb
+		- D: firstNameDotVerb
 				[firstname] + [.] + [verb]
 				example: jens.codes, jessie.travels
 
-		- randomWordTimesN
+		- E: randomWordTimesN
 				n           * [randomWord]
 				example: mytravelhobby, coolmathgames
 
-		- randomWordTimesNnumSeq
+		- F: randomWordTimesNnumSeq
 				[PatternE]  + [numericSequence]
 				example: mytravelhobby4, coolmathgames24
 
-		- randomPermutation
+		- G: randomPermutation
 				[randomPermutation]
 				example: aural (laura)
 
-		- leetspeak
+		- H: leetspeak
 				[leetspeak(PatternA-G)]
 				 example: kyli3j33n3rsb1gg3stst4lk3r
 */
@@ -43,14 +43,14 @@ type Pattern int
 
 // An enumartion of different username generation Patterns.
 const (
-	firstNameNumSeq Pattern = iota
-	firstNameRandWord
-	firstNameRandWordNumSeq
-	firstNameDotVerb
-	randomWordTimesN
-	randomWordTimesNnumSeq
-	randomPermutation
-	leetspeak
+	firstNameNumSeq         Pattern = iota // A
+	firstNameRandWord                      // B
+	firstNameRandWordNumSeq                // C
+	firstNameDotVerb                       // D
+	randomWordTimesN                       // E
+	randomWordTimesNnumSeq                 // F
+	randomPermutation                      // G
+	leetspeak                              // H
 )
 
 // PatternOptions combine parameters needed to generate the Patterns A-H.

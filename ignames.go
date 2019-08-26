@@ -13,9 +13,21 @@ func main() {
 
 	opts := PatternOptions{
 		firstName: "nik",
-		numSeqLen: 2}
+		wordList: []string{
+			"music",
+			"av",
+			"tech",
+			"poly",
+			"art",
+			"arts",
+			"love",
+			"fun",
+			"creative",
+			"sspace",
+		},
+	}
 
-	searchForPattern(firstNameNumSeq, opts, validNames, &waitgroup)
+	searchForPattern(firstNameRandWord, opts, validNames, &waitgroup)
 
 	for name := range validNames {
 		fmt.Printf("[!] Valid: %s\tURL: %s\n", name, baseURL+name)

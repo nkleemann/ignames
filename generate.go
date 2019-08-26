@@ -16,6 +16,7 @@ func generateUserNames(p Pattern, opts PatternOptions) []string {
 
 	// [firstname] + [randomWord]
 	case firstNameRandWord:
+		names = genAllPatternB(opts.firstName, opts.wordList)
 
 	// [PatternB]  + [numericSequence]
 	case firstNameRandWordNumSeq:
@@ -46,6 +47,15 @@ func genAllPatternA(firstName string, numSeqLen int) []string {
 
 	for _, comb := range allCombs {
 		names = append(names, firstName+comb)
+	}
+	return names
+}
+
+func genAllPatternB(firstName string, wordList []string) []string {
+	var names []string
+
+	for _, word := range wordList {
+		names = append(names, firstName+word)
 	}
 	return names
 }
