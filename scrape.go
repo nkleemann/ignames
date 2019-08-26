@@ -47,19 +47,15 @@ func checkName(name string, validNames chan string, waitgroup *sync.WaitGroup) {
 	}
 }
 
-// Searche for random usernames and return valid ones in a list
-// TODO make: searchForPattern(pattern Pattern) {switch on Pattern enum}
-func searchForPatternG(seq []rune, validNames chan string, wg *sync.WaitGroup) {
-	// Get all permutations of the given sequence
-	allPerms := getPerms(string(seq))
+func searchForPattern(p Pattern, opts PatternOptions, validNames chan string, wg *sync.WaitGroup) {
+	// Generate all usernames for the specific pattern
+	usernames := generateUserNames(p, opts)
 
-	// Check every name matching Pattern A
-	for _, perm := range allPerms {
+	// Check availability of every name
+	for _, name := range usernames {
 		wg.Add(1)
-		go checkName(perm, validNames, wg)
+		go checkName(name, validNames, wg)
 	}
 	wg.Wait()
 	close(validNames)
 }
-
-// func searchForPattern(pattern Pattern)
