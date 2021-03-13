@@ -10,20 +10,12 @@ func main() {
 
 	var waitgroup sync.WaitGroup
 	validNames := make(chan string, config.NumberOfNames)
-
+	
+	// insert your own stuff here
 	opts := PatternOptions{
-		firstName: "nik",
+		firstName: "?????",
 		wordList: []string{
-			"music",
-			"av",
-			"tech",
-			"poly",
-			"art",
-			"arts",
-			"love",
-			"fun",
-			"creative",
-			"sspace",
+			"?????"
 		},
 	}
 
