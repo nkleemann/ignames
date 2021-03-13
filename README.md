@@ -1,4 +1,4 @@
-scrape instagram to find short usernames based on the most common patterns.
+multithreaded instagram scraper searching for short available usernames based on common patterns.
 
 ### available patterns
 
